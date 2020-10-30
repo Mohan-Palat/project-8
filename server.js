@@ -2,6 +2,8 @@
 //Dependencies
 //___________________
 const express = require('express');
+// Needed for EJS Layouts
+const expressLayouts = require('express-ejs-layouts');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
@@ -32,8 +34,11 @@ db.on('open' , ()=>{});
 //___________________
 //Middleware
 //___________________
-//use public folder for static assets
+// Use public folder for static assets
 app.use(express.static('public'));
+// Needed for EJS
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project

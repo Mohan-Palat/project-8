@@ -1,1 +1,10 @@
 <h1>This is the index</h1>
+
+<ul>
+    <% boxes.forEach(box => { %>
+    <li>
+      <a href="/boxes/<%=box._id%>">Box <%=box.ident%>
+      </a>
+    </li>
+    <% }) %>
+</ul>

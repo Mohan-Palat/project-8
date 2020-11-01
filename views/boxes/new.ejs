@@ -1,0 +1,9 @@
+<h1>Create New Box</h1>
+
+<form action="/boxes" method="POST">
+    <div class="form-group">
+      <label for="ident">Box Number</label>
+      <input type="number" class="form-control" id="ident" name="ident" min='<%=maxBoxNum + 1%>' value='<%=maxBoxNum +1 %>'/>
+    </div>
+    <p>Max Box <%=maxBoxNum%></p>
+</form>

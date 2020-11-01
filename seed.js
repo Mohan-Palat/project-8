@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
-const Box = require('./models/box');
-const Category = require('./models/category');
+const Box = require('./models/box.js');  // delete this and the box model if embeded works
+// const Box = require('./models/user');  // delete this if reference works
+// const Category = require('./models/category');
+const User = require('./models/user');
 
 const mongoURI = 'mongodb://localhost/paul-project2';
 mongoose.connect(
@@ -19,63 +21,88 @@ async function seed() {
   // CREATE some boxes
   // The "await" reserve word is another promise.  We need to wait for the task to complete before moving forward
   const box1 = await Box.create({
-    id: 1,
+    ident: 1,
+    desc: "This is box 1",
+    category: "Tools"
   });
   const box2 = await Box.create({
-    id: 2,
+    ident: 2,
+    desc: "This is box 2",
+    category: "Pictures"
   });
   const box3 = await Box.create({
-    id: 3,
+    ident: 3,
+    desc: "This is box 3",
+    category: "Toys"
   });
   const box4 = await Box.create({
-    id: 4,
+    ident: 4,
+    desc: "This is box 4",
+    category: "Clothes"
   });
 
   // CREATE some unassociated categories
-  const cat1 = await Category.create({
-    name: 'Tools',
-    boxes: [],
-  });
-  const cat2 = await Category.create({
-    name: 'Pictures',
-    boxes: [],
-  });
-  const cat3 = await Category.create({
-    name: 'Toys',
-    boxes: [],
-  });
+  // const cat1 = await Category.create({
+  //   name: 'Tools',
+  //   boxes: [],
+  // });
+  // const cat2 = await Category.create({
+  //   name: 'Pictures',
+  //   boxes: [],
+  // });
+  // const cat3 = await Category.create({
+  //   name: 'Toys',
+  //   boxes: [],
+  // });
+  // const cat4 = await Category.create({
+  //   name: 'Clothes',
+  //   boxes: [],
+  // });
+  // const cat5 = await Category.create({
+  //   name: 'Cookware',
+  //   boxes: [],
+  // });
   
 
-  // CREATE some categories and associate with boxes
+  // CREATE some users and associate with boxes
   // We are not using the Mongoose create statement because we need to do additional actions before persisting (i.e., adding the boxes before saving to the DB further below).
-  const c1 = new Category({
-    name: 'Clothes',
+  const user1 = new User({
+    name: 'User1',
     boxes: [],
   });
 
-  const c2 = new Category({
-    name: 'Cookware',
+  // const user1 = await User.create({
+  //   name: 'User1',
+  //   boxes: [{
+  //       ident: 2,
+  //       desc: "This is box 2",
+  //       category: "Pictures"
+  //     }],
+  // });
+
+  const user2 = new User({
+    name: 'User2',
     boxes: [],
   });
 
-  // Push some boxes into the category array
-  c1.boxes.push(box2);
-  c1.save(function (err, savedCategory) {
+  // Push some boxes into the user array
+  user1.boxes.push(box2);
+  user1.save(function (err, savedUser) {
     if (err) {
       console.log(err);
     } else {
-      console.log('Category is ', savedCategory);
+      console.log('User is ', savedUser);
     }
   });
 
 
-  c2.boxes.push(box1);
-  c2.boxes.push(box3);
-  c2.save(function (err, savedCategory) {
+  user2.boxes.push(box1);
+  user2.boxes.push(box3);
+  user2.save(function (err, savedUser) {
     if (err) {
       console.log(err);
     } else {
-      console.log('Category is ', savedCategory);
+      console.log('User is ', savedUser);
     }
   });
 }

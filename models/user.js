@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
     default: '',
     unique: true
   },
+  password: {
+    type: String
+  },
   boxes: [
     {
       type: mongoose.Schema.Types.ObjectId,

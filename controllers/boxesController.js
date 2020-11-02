@@ -8,7 +8,8 @@ const User = require('../models/user.js');
 // **************************************
 
 // ROUTES
-// INDEX  - main menu
+// INDEX  - main menu 
+// ******CURRENT BOXES SHOW ROUTE SHOULD BE CHANGED TO THIS MAYBE AND THEN CONTENTS OF BOXES SHOULD BE IN SHOW ROUTE
 router.get('/', async (req, res) => {
     // Need the populate function along with user parm so we have all the details, not just the box identNum.
     let foundUser = await User.findOne({name: currentUser}).populate({
@@ -35,8 +36,14 @@ router.get('/:userId/boxes/new', async (req, res) => {
         populate('boxes', 'identNum'). 
         exec(function (err, user) {
         // if (err) return handleError(err);
-            // Assumes that the last box in the user array has the max box identNum
-            let maxBoxNum = user.boxes[user.boxes.length - 1].identNum;
+        
+            // Default the 
+            let maxBoxNum = 0;
+            // If boxes are found
+            if (user.boxes.length > 0) {
+                // Assumes that the last box in the user array has the max box identNum
+                let maxBoxNum = user.boxes[user.boxes.length - 1].identNum;
+            }
             console.log('Here is the MAX box identNum:   ' + maxBoxNum);
             console.log('Here is the user id:   ' + user._id)
         // Render page and pass categories and latest box number
@@ -55,7 +62,7 @@ router.get('/:userId/boxes', async (req, res) => {
          path: 'boxes',
          options: { sort: { ['identNum']: 1 } },
     });
-    res.render('users/show.ejs', {
+    res.render('boxes/show.ejs', {
          user: foundUser
     });     
 });

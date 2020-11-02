@@ -1,10 +1,2 @@
-<h1>Here are the boxes for <%=user._id%></h1>
+<h1>User Show Page <%=user._id%></h1>
 
-<ul>
-    <% user.boxes.forEach(box => { %>
-    <li>
-      <a href="/users/<%=user._id%>/boxes/<%=box._id%>/edit">Box <%=box.identNum%>
-      </a>
-    </li>
-    <% }) %>
-</ul>

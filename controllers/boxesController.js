@@ -99,8 +99,31 @@ router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
 });
 
 
+router.put('/:userId/boxes/:boxId', async (req, res) => {
+    let foundBox = await Box.findByIdAndUpdate(
+      req.params.boxId,
+      req.body,
+      { new: true },
+    );
+    // res.send('Update made');
+    res.redirect(`/users/${req.params.userId}/boxes`);
+});
 
-
+// DELETE
+router.delete('/:userId/boxes/:boxId', async (req, res) => {
+    // Find user so we can remove the box id from the boes array
+    let foundUser = await User.findByIdAndUpdate(
+        req.params.userId,
+       { $pull: { boxes: req.params.boxId,},},
+       { new: true, upsert: true }
+     );
+    console.log("In DELETE, found user:   " + foundUser);
+    let foundBox = await Box.findByIdAndRemove(
+      req.params.boxId,
+    );
+    // res.send('Update made');
+    res.redirect(`/users/${req.params.userId}/boxes`);
+});
 
 
 module.exports = router;

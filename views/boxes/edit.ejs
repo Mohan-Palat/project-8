@@ -1,6 +1,6 @@
 <h1>Edit Box</h1>
 <p><%= box._id%></p>
-<form action="/CHANGETHIS/<%= user._id%>/boxes?_method=PUT" method="POST">
+<form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
     <div class="form-group">
       <label for="identNum">Box Number</label>
       <input type="number" class="form-control" id="identNum" value='<%=box.identNum %>'/>

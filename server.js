@@ -14,8 +14,7 @@ const app = express ();
 const db = mongoose.connection;
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODBURI;
-// Needed for sessions
-const sessionsController = require('./controllers/sessionsController.js')
+
 
 //___________________
 //Port
@@ -48,17 +47,7 @@ app.use(express.static('public'));
 // Needed for EJS
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
-// populates req.body with parsed info from forms - if no data from forms will return an empty object {}
-app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
-// This needs to come after the body parser
-app.use('/sessions', sessionsController);
-app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
-//use method override
-app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
-// Define path for user routes and link to control file
-app.use('/users', require('./controllers/usersController'));
-// Define path for box routes and link to control file
-app.use('/users', require('./controllers/boxesController'));
+
 // Define path and params for sessions information
 app.use(
   session({
@@ -67,6 +56,19 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
+// populates req.body with parsed info from forms - if no data from forms will return an empty object {}
+app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
+
+app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
+//use method override
+app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
+// Define path for user routes and link to control file
+app.use('/users', require('./controllers/usersController'));
+// Define path for box routes and link to control file
+app.use('/users', require('./controllers/boxesController'));
+// Needed for sessions and must come after the body parser
+app.use('/sessions', require('./controllers/sessionsController.js'));
+
 
 
 

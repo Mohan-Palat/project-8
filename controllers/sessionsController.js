@@ -39,11 +39,11 @@ router.post('/', (req, res) => {
       // now let's check if passwords match
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         // add the user to our session
-        console.log("Current user: "+ foundUser);
+        // console.log("Current user: "+ foundUser);
         req.session.currentUser = foundUser
-        // redirect back to our home page
-        //res.redirect('/')
-        res.send("Logged in");
+        // redirect to box index
+        res.redirect(`/users/${foundUser._id}/boxes`)
+        // res.send("Logged in");
       } else {
         // passwords do not match
         res.send('<a href="/"> password does not match </a>')

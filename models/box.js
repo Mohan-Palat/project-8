@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const boxSchema = new mongoose.Schema({
-  ident: {
+  identNum: {
     type: Number,
   },
   desc: {

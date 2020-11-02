@@ -21,22 +21,22 @@ async function seed() {
   // CREATE some boxes
   // The "await" reserve word is another promise.  We need to wait for the task to complete before moving forward
   const box1 = await Box.create({
-    ident: 1,
+    identNum: 1,
     desc: "This is box 1",
     category: "Tools"
   });
   const box2 = await Box.create({
-    ident: 2,
+    identNum: 2,
     desc: "This is box 2",
     category: "Pictures"
   });
   const box3 = await Box.create({
-    ident: 3,
+    identNum: 3,
     desc: "This is box 3",
     category: "Toys"
   });
   const box4 = await Box.create({
-    ident: 4,
+    identNum: 4,
     desc: "This is box 4",
     category: "Clothes"
   });
@@ -74,7 +74,7 @@ async function seed() {
   // const user1 = await User.create({
   //   name: 'User1',
   //   boxes: [{
-  //       ident: 2,
+  //       identNum: 2,
   //       desc: "This is box 2",
   //       category: "Pictures"
   //     }],

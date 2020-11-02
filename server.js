@@ -1,6 +1,7 @@
 //___________________
 //Dependencies
 //___________________
+require('dotenv').config()    // This needs to be at the very top
 const express = require('express');
 // Needed for EJS Layouts
 const expressLayouts = require('express-ejs-layouts');
@@ -8,16 +9,18 @@ const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
+const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODBURI
 //___________________
 //Port
 //___________________
 // Allow use of Heroku's port or your own local port, depending on the environment
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 //___________________
 //Database
 //___________________
 // How to connect to the database either via heroku or locally
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ 'paul-project2';
+// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ 'paul-project2';
 // Connect to Mongo
 mongoose.connect(MONGODB_URI ,  {
     useNewUrlParser: true,
@@ -47,7 +50,7 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Define path for user routes and link to control file
 app.use('/users', require('./controllers/usersController'));
 // Define path for box routes and link to control file
-app.use('/boxes', require('./controllers/boxesController'));
+app.use('/users', require('./controllers/boxesController'));
 
 
 
@@ -56,14 +59,14 @@ app.use('/boxes', require('./controllers/boxesController'));
 // Routes
 //___________________
 //localhost:3000
-app.get('/' , (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/' , (req, res) => {
+//   res.send('Hello World!');
+// });
 
 // This is not in the controller files because it is considered a separate page - home page
-// app.get('/', (req, res) => {
-//     res.render('home.ejs');
-// });
+app.get('/', (req, res) => {
+    res.render('login.ejs');
+});
 
 
 //___________________

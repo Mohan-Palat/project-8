@@ -9,18 +9,14 @@ const User = require('../models/user.js');
 
 // ROUTES
 // INDEX  - main menu 
-// ******CURRENT BOXES SHOW ROUTE SHOULD BE CHANGED TO THIS MAYBE AND THEN CONTENTS OF BOXES SHOULD BE IN SHOW ROUTE
-router.get('/', async (req, res) => {
+router.get('/:userId/boxes', async (req, res) => {
     // Need the populate function along with user parm so we have all the details, not just the box identNum.
-    let foundUser = await User.findOne({name: currentUser}).populate({
-    // let foundUser = await User.findById(req.params.id).populate({
-        path: 'boxes',
-        options: { sort: { ['identNum']: 1 } },
+    let foundUser = await User.findById(req.params.userId).populate({
+         path: 'boxes',
+         options: { sort: { ['identNum']: 1 } },
     });
-    console.log(foundUser);
-    console.log("box stuff:    " + foundUser.boxes[0].desc);
-    res.render('users/index.ejs', {
-        user: foundUser
+    res.render('boxes/index.ejs', {
+         user: foundUser
     });     
 });
 
@@ -56,14 +52,14 @@ router.get('/:userId/boxes/new', async (req, res) => {
 });
     
 // SHOW
-router.get('/:userId/boxes', async (req, res) => {
-    // Need the populate function along with user parm so we have all the details, not just the box identNum.
-    let foundUser = await User.findById(req.params.userId).populate({
-         path: 'boxes',
-         options: { sort: { ['identNum']: 1 } },
-    });
+router.get('/:userId/boxes/:boxId', async (req, res) => {
+    // Get the user and box details
+    let foundUser = await User.findById(req.params.userId);
+    let foundBox = await Box.findById(req.params.boxId);
+
     res.render('boxes/show.ejs', {
-         user: foundUser
+         box: foundBox,
+         user: foundUser,
     });     
 });
 

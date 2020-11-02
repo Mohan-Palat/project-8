@@ -1,11 +1,11 @@
-<h1>This is the index</h1>
+<h1>Here are the boxes for <%=user._id%></h1>
 
 <ul>
     <% user.boxes.forEach(box => { %>
     <li>
-      <a href="/boxes/<%=box._id%>">Box <%=box.identNum%>
+      <a href="/users/<%=user._id%>/boxes/<%=box._id%>">Box <%=box.identNum%>
       </a>
     </li>
     <% }) %>
 </ul>
-
+<div><a href="/users/<%=user._id%>/boxes/new">Create a New Box</a></div>

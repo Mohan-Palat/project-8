@@ -1,11 +1,16 @@
-<h1>Here are the boxes for <%=user._id%></h1>
+<h1>Here are the box details</h1>
 
-<ul>
-    <% user.boxes.forEach(box => { %>
-    <li>
-      <a href="/users/<%=user._id%>/boxes/<%=box._id%>/edit">Box <%=box.identNum%>
-      </a>
-    </li>
-    <% }) %>
-</ul>
-<div><a href="/users/<%=user._id%>/boxes/new">Create a New Box</a></div>
+<form action="/users/<%=user._id%>/boxes/<%=box._id%>/edit" method="GET">
+    <div class="form-group">
+      <label for="identNum">Box Number</label>
+      <input type="number" class="form-control" id="identNum" name="identNum" value='<%=box.identNum%>'/>
+
+      <label for="desc">Description</label>
+      <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc%>'/>
+
+      <label for="category">Category</label>
+      <input type="text" class="form-control" id="category" name="category" value='<%=box.category%>'/>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Edit Box</button>
+</form>

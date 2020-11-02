@@ -16,7 +16,10 @@ const Box = require('./box.js');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    default: '',
+    default: ''
+  },
+  userName: {
+    type: String,
     unique: true
   },
   password: {

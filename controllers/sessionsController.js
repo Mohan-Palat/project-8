@@ -4,14 +4,13 @@ const router = express.Router()
 const User = require('../models/user.js');
 
 router.get('/new', (req, res) => {
-  res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
-//   res.render('sessions/new.ejs')
+//   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
+  res.render('sessions/new.ejs')
 })
 
 // on sessions form submit (log in)
 router.post('/', (req, res) => {
-    console.log("IN SESSIONS POST");
-    console.log("REQUEST BODY:     " + req.body);
+    // console.log("REQUEST BODY:     " + req.body);
 
   // username is found and password matches
   // successful log in
@@ -25,7 +24,9 @@ router.post('/', (req, res) => {
   // some weird thing happened???????
   
   // Step 1 Look for the username
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  console.log("IN SESSIONS POST, userName:  " + req.body.userName);
+  console.log("IN SESSIONS POST, password:  " + req.body.password);
+  User.findOne({ userName: req.body.userName }, (err, foundUser) => {
     // Database error
     if (err) {
       console.log(err)
@@ -38,9 +39,11 @@ router.post('/', (req, res) => {
       // now let's check if passwords match
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         // add the user to our session
+        console.log("Current user: "+ foundUser);
         req.session.currentUser = foundUser
         // redirect back to our home page
-        res.redirect('/')
+        //res.redirect('/')
+        res.send("Logged in");
       } else {
         // passwords do not match
         res.send('<a href="/"> password does not match </a>')

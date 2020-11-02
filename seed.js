@@ -68,6 +68,7 @@ async function seed() {
   // We are not using the Mongoose create statement because we need to do additional actions before persisting (i.e., adding the boxes before saving to the DB further below).
   const user1 = new User({
     name: 'User1',
+    userName: 'me1',
     boxes: [],
   });
 
@@ -82,6 +83,7 @@ async function seed() {
 
   const user2 = new User({
     name: 'User2',
+    userName: 'me2',
     boxes: [],
   });
 

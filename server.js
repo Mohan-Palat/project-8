@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODBURI;
 // Needed for sessions
 const sessionsController = require('./controllers/sessionsController.js')
-app.use('/sessions', sessionsController);
+
 //___________________
 //Port
 //___________________
@@ -50,6 +50,8 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
+// This needs to come after the body parser
+app.use('/sessions', sessionsController);
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form

@@ -42,10 +42,10 @@ router.get('/:userId/boxes/new', async (req, res) => {
             // If boxes are found
             if (user.boxes.length > 0) {
                 // Assumes that the last box in the user array has the max box identNum
-                let maxBoxNum = user.boxes[user.boxes.length - 1].identNum;
+                maxBoxNum = user.boxes[user.boxes.length - 1].identNum;
             }
-            console.log('Here is the MAX box identNum:   ' + maxBoxNum);
-            console.log('Here is the user id:   ' + user._id)
+            // console.log('Here is the MAX box identNum:   ' + maxBoxNum);
+            // console.log('Here is the user id:   ' + user._id)
         // Render page and pass categories and latest box number
         res.render('boxes/new.ejs', { 
             categories: allCategories,

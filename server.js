@@ -1,16 +1,22 @@
 //___________________
 //Dependencies
 //___________________
+// Needed for environment variables
 require('dotenv').config()    // This needs to be at the very top
 const express = require('express');
+// Needed for sessions
+const session = require('express-session')
 // Needed for EJS Layouts
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
-const PORT = process.env.PORT
-const MONGODB_URI = process.env.MONGODBURI
+const PORT = process.env.PORT;
+const MONGODB_URI = process.env.MONGODBURI;
+// Needed for sessions
+const sessionsController = require('./controllers/sessionsController.js')
+app.use('/sessions', sessionsController);
 //___________________
 //Port
 //___________________
@@ -51,6 +57,14 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 app.use('/users', require('./controllers/usersController'));
 // Define path for box routes and link to control file
 app.use('/users', require('./controllers/boxesController'));
+// Define path and params for sessions information
+app.use(
+  session({
+    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+  })
+)
 
 
 

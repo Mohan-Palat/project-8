@@ -1,9 +1,14 @@
-<nav>
-    <div>
-      <ul>
-        <li>
-          <a href="/users/<%= box._id%>/boxes/new">Create New Box</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+
+<ul class="right">
+  <% if (currentUser) { %>
+  <li>Welcome <%= currentUser.name %></li>
+  <li>
+    <form action="/sessions?_method=DELETE" method="POST">
+      <input type="submit" value="Log Out" class="btn-small red" />
+    </form>
+  </li>
+  <% } else { %>
+  <li><a href="/users/new">Sign Up</a></li>
+  <li><a href="/sessions/new">Log In</a></li>
+  <% } %>
+</ul>

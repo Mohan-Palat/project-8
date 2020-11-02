@@ -10,7 +10,11 @@ const bcrypt = require('bcrypt');
 
 // ROUTES
 // INDEX  - main menu
-
+// router.get('/', (req, res) => {
+//     // res.render('sessions/new.ejs')
+//     console.log("log in body:    " + req.body);
+//     res.send ("You made it   " + req.body)
+// })
 
 
 router.get('/new', (req, res) => {

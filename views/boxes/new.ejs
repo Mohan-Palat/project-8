@@ -1,23 +1,30 @@
-<h1>Create New Box</h1>
-
-<form action="/users/<%= user._id%>/boxes" method="POST">
-    <div class="form-group">
-      <label for="identNum">Box Number</label>
-      <input type="number" class="form-control" id="identNum" name="identNum" min='<%=maxBoxNum + 1%>' value='<%=maxBoxNum +1 %>'/>
-
-      <label for="desc">Description</label>
-      <input type="text" class="form-control" id="desc" name="desc"/>
-
-      <div class="input-field col s12">
-        <select name="category" id="category">
-          <% for( let index = 0; index < categories.length; index++ ) { %>
-            <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
-            <% } %>
-          <label for="category">Category</label>
-        </select>
+<div class="container">
+  <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+  <div class="row">
+    <form class="col s12" action="/users/<%= user._id%>/boxes" method="POST">
+      <div class="row">
+        <div class="input-field col s2">
+          <label class="active" for="identNum">Box Number</label>
+          <input type="number" class="form-control" id="identNum" name="identNum" min='<%=maxBoxNum + 1%>' value='<%=maxBoxNum +1 %>'/>
+        </div>
+        <div class="input-field col s4">
+          <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
+          <select>
+            <option value="" disabled selected>Choose Category</option>
+            <% for( let index = 0; index < categories.length; index++ ) { %>
+              <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
+              <% } %>
+            <label>Category</label>
+          </select>  
+        </div>
       </div>
-    </div>
-    <p>Max Box <%=maxBoxNum%></p>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="desc">Description</label>
+          <input type="text" class="form-control" id="desc" name="desc"/>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

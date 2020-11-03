@@ -1,22 +1,39 @@
-<h1>Edit Box</h1>
-<p><%= box._id%></p>
-<form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
-    <div class="form-group">
-      <label for="identNum">Box Number</label>
-      <input type="number" class="form-control" id="identNum" value='<%=box.identNum %>'/>
-
-      <label for="desc">Description</label>
-      <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
-
-      <label for="category">Category</label>
-      <!-- <input type="text" class="form-control" id="category" name="category" value='<%=box.category %>'/> -->
-      <select name="category" id="category" value="<%=box.category %>">
-        <% for( let index = 0; index < categories.length; index++ ) { %>
-          <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
-        <% } %>
-      </select>
-
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+<div class="container">
+  <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+  <div class="row">
+    <form class="col s12" action="/users/<%= user._id%>/boxes" method="POST">
+      <div class="row">
+        <div class="input-field col s2">
+          <label for="identNum">Box Number</label>
+          <input id="disabled" type="number" class="form-control" id="identNum" disabled value="<%=box.identNum %>"/>
+        </div>
+        <div class="input-field col s4">
+          <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
+          <select>
+            <% for( let index = 0; index < categories.length; index++ ) { %>
+              <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
+              <% } %>
+            <label>Category</label>
+          </select>  
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="desc">Description</label>
+          <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s3">
+          <input id = "moved" type = "checkbox" class = "filled-in" />
+          <label for = "moved">Moved to new location?</label>
+        </div>
+        <div class="input-field col s3">
+          <input id = "unpacked" type = "checkbox" class = "filled-in" />
+          <label for = "unpacked">Was this box unpacked?</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

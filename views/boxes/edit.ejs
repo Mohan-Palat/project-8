@@ -9,8 +9,14 @@
       <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
 
       <label for="category">Category</label>
-      <input type="text" class="form-control" id="category" name="category" value='<%=box.category %>'/>
+      <!-- <input type="text" class="form-control" id="category" name="category" value='<%=box.category %>'/> -->
+      <select name="category" id="category" value="<%=box.category %>">
+        <% for( let index = 0; index < categories.length; index++ ) { %>
+          <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
+        <% } %>
+      </select>
 
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>

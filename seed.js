@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-const Box = require('./models/box.js');  // delete this and the box model if embeded works
-// const Box = require('./models/user');  // delete this if reference works
-// const Category = require('./models/category');
+const Box = require('./models/box.js');  
+const Category = require('./models/category');
 const User = require('./models/user');
 
 const mongoURI = 'mongodb://localhost/paul-project2';
@@ -42,26 +41,26 @@ async function seed() {
   });
 
   // CREATE some unassociated categories
-  // const cat1 = await Category.create({
-  //   name: 'Tools',
-  //   boxes: [],
-  // });
-  // const cat2 = await Category.create({
-  //   name: 'Pictures',
-  //   boxes: [],
-  // });
-  // const cat3 = await Category.create({
-  //   name: 'Toys',
-  //   boxes: [],
-  // });
-  // const cat4 = await Category.create({
-  //   name: 'Clothes',
-  //   boxes: [],
-  // });
-  // const cat5 = await Category.create({
-  //   name: 'Cookware',
-  //   boxes: [],
-  // });
+  const cat1 = await Category.create({
+    name: 'Tools',
+    // boxes: [],
+  });
+  const cat2 = await Category.create({
+    name: 'Pictures',
+    // boxes: [],
+  });
+  const cat3 = await Category.create({
+    name: 'Toys',
+    // boxes: [],
+  });
+  const cat4 = await Category.create({
+    name: 'Clothes',
+    // boxes: [],
+  });
+  const cat5 = await Category.create({
+    name: 'Cookware',
+    // boxes: [],
+  });
   
 
   // CREATE some users and associate with boxes

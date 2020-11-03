@@ -26,7 +26,8 @@ router.get('/:userId/boxes', async (req, res) => {
 // If one or both async/await is omitted, you may get an error on the new page saying that the ingredients variable is not defined.
 router.get('/:userId/boxes/new', async (req, res) => {
     // Get all categories from the DB
-    const allCategories = await Category.find({})
+    const allCategories = await Category.find({});
+    console.log("Categories:     " + allCategories);
     // Get the lastest box number to prevalue the new box field
     const user = await User.findById(req.params.userId).
         // Only return the box identNum (which may be many depending on num of boxes)
@@ -62,7 +63,7 @@ router.get('/:userId/boxes/:boxId', async (req, res) => {
     res.render('boxes/show.ejs', {
         currentUser: req.session.currentUser, 
         box: foundBox,
-         user: foundUser,
+        user: foundUser,
     });     
 });
 
@@ -97,6 +98,7 @@ router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
     const foundUser = await User.findById(req.params.userId)
     res.render('boxes/edit.ejs', {
         currentUser: req.session.currentUser,
+        categories: allCategories,
         box: foundBox,
         user: foundUser
     });   

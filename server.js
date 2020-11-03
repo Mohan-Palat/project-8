@@ -82,9 +82,10 @@ app.use('/sessions', require('./controllers/sessionsController.js'));
 // });
 
 // This is not in the controller files because it is considered a separate page.
-// Take user to the login page
+// Take user to the main page
 app.get('/', (req, res) => {
-    res.render('sessions/new.ejs');
+    // res.render('sessions/new.ejs');
+    res.redirect('/users');
 });
 
 

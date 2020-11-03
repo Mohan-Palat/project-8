@@ -81,9 +81,10 @@ app.use('/sessions', require('./controllers/sessionsController.js'));
 //   res.send('Hello World!');
 // });
 
-// This is not in the controller files because it is considered a separate page - home page
+// This is not in the controller files because it is considered a separate page.
+// Take user to the login page
 app.get('/', (req, res) => {
-    res.render('login.ejs');
+    res.render('sessions/new.ejs');
 });
 
 

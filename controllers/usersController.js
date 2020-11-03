@@ -4,21 +4,20 @@ const Category = require('../models/category.js');
 const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
 
-// **************************************
-// const currentUser = "User2"
-// **************************************
-
 // ROUTES
 // INDEX  - main menu
-// router.get('/', (req, res) => {
-//     // res.render('sessions/new.ejs')
-//     console.log("log in body:    " + req.body);
-//     res.send ("You made it   " + req.body)
-// })
+router.get('/', (req, res) => {
+    // res.render('sessions/new.ejs')
+    res.render(
+      'users/index.ejs',
+      {currentUser: req.session.currentUser}
+    )
+})
 
 
 router.get('/new', (req, res) => {
-    res.render('users/new.ejs')
+    res.render('users/new.ejs',
+    {currentUser: req.session.currentUser})
 })
   
 router.post('/', (req, res) => {

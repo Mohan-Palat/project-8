@@ -16,7 +16,8 @@ router.get('/:userId/boxes', async (req, res) => {
          options: { sort: { ['identNum']: 1 } },
     });
     res.render('boxes/index.ejs', {
-         user: foundUser
+        currentUser: req.session.currentUser,
+        user: foundUser
     });     
 });
 
@@ -44,6 +45,7 @@ router.get('/:userId/boxes/new', async (req, res) => {
             // console.log('Here is the user id:   ' + user._id)
         // Render page and pass categories and latest box number
         res.render('boxes/new.ejs', { 
+            currentUser: req.session.currentUser,
             categories: allCategories,
             user,
             maxBoxNum
@@ -58,7 +60,8 @@ router.get('/:userId/boxes/:boxId', async (req, res) => {
     let foundBox = await Box.findById(req.params.boxId);
 
     res.render('boxes/show.ejs', {
-         box: foundBox,
+        currentUser: req.session.currentUser, 
+        box: foundBox,
          user: foundUser,
     });     
 });
@@ -93,6 +96,7 @@ router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
     const foundBox = await Box.findById(req.params.boxId)
     const foundUser = await User.findById(req.params.userId)
     res.render('boxes/edit.ejs', {
+        currentUser: req.session.currentUser,
         box: foundBox,
         user: foundUser
     });   

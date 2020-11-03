@@ -123,7 +123,7 @@ router.delete('/:userId/boxes/:boxId', async (req, res) => {
        { $pull: { boxes: req.params.boxId,},},
        { new: true, upsert: true }
      );
-    console.log("In DELETE, found user:   " + foundUser);
+    // console.log("In DELETE, found user:   " + foundUser);
     let foundBox = await Box.findByIdAndRemove(
       req.params.boxId,
     );

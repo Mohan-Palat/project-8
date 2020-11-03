@@ -1,7 +1,7 @@
 <div class="container">
   <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
   <div class="row">
-    <form class="col s12" action="/users/<%= user._id%>/boxes" method="POST">
+    <form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
       <div class="row">
         <div class="input-field col s2">
           <label for="identNum">Box Number</label>
@@ -9,7 +9,7 @@
         </div>
         <div class="input-field col s4">
           <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
-          <select>
+          <select name="category" id="category">
             <% for( let index = 0; index < categories.length; index++ ) { %>
               <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
               <% } %>

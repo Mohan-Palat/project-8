@@ -1,0 +1,9 @@
+h1 {
+    color:red;
+}
+
+#desc-limit {
+   width: 140px; 
+   white-space: nowrap; 
+   overflow: hidden;
+}

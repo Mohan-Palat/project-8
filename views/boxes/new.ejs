@@ -9,7 +9,7 @@
         </div>
         <div class="input-field col s4">
           <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
-          <select>
+          <select name="category" id="category">
             <option value="" disabled selected>Choose Category</option>
             <% for( let index = 0; index < categories.length; index++ ) { %>
               <option value="<%= categories[index].name%>"><%= categories[index].name%></option>

@@ -15,7 +15,6 @@ const db = mongoose.connection;
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODBURI;
 
-
 //___________________
 //Port
 //___________________
@@ -68,7 +67,6 @@ app.use('/users', require('./controllers/usersController'));
 app.use('/users', require('./controllers/boxesController'));
 // Needed for sessions and must come after the body parser
 app.use('/sessions', require('./controllers/sessionsController.js'));
-
 
 
 

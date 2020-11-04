@@ -12,11 +12,11 @@ nav {
 }
 
 
-#desc-limit {
-   width: 140px; 
+/* #desc-limit {
+   width: 180px; 
    white-space: nowrap; 
    overflow: hidden;
-}
+} */
 
 #logo {
     width: 100px; 

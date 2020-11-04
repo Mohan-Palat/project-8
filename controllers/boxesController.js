@@ -3,10 +3,18 @@ const Box = require('../models/box.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
 
+const isAuthenticated = (req, res, next) => {
+    if (req.session.currentUser) {
+      return next()
+    } else {
+      res.redirect('/sessions/new')
+    }
+}
+
 
 // ROUTES
 // INDEX  - main menu 
-router.get('/:userId/boxes', async (req, res) => {
+router.get('/:userId/boxes', isAuthenticated, async (req, res) => {
     // Need the populate function along with user parm so we have all the details, not just the box identNum.
     let foundUser = await User.findById(req.params.userId).populate({
          path: 'boxes',
@@ -22,7 +30,7 @@ router.get('/:userId/boxes', async (req, res) => {
 
 
 // NEW - form where new entries are made.  
-router.get('/:userId/boxes/new', async (req, res) => {
+router.get('/:userId/boxes/new', isAuthenticated, async (req, res) => {
     // Get all categories from the DB
     const allCategories = await Category.find({});
     // console.log("Categories:     " + allCategories);
@@ -54,7 +62,7 @@ router.get('/:userId/boxes/new', async (req, res) => {
     
 // SHOW - details page.  
 // It will display all boxes with some details
-router.get('/:userId/boxes/:boxId', async (req, res) => {
+router.get('/:userId/boxes/:boxId', isAuthenticated, async (req, res) => {
     // Get the user, box, and category details from the DB
     let foundUser = await User.findById(req.params.userId);
     let foundBox = await Box.findById(req.params.boxId);
@@ -72,7 +80,7 @@ router.get('/:userId/boxes/:boxId', async (req, res) => {
 
 
 // POST (create) - no page; just an action which will add a new entry
-router.post('/:userId/boxes', async (req, res) => {
+router.post('/:userId/boxes', isAuthenticated, async (req, res) => {
     // console.log("REQ BODY:     " + req.body);
 
     // Create new Box
@@ -96,7 +104,7 @@ router.post('/:userId/boxes', async (req, res) => {
 });
     
 // EDIT - form where entries are updated  
-router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
+router.get('/:userId/boxes/:boxId/edit', isAuthenticated, async (req, res) => {
     // Get all categories from the DB
     const allCategories = await Category.find({})
     
@@ -114,7 +122,7 @@ router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
 });
 
 // UPDATE (PUT) - no page; just an action that will update an entry
-router.put('/:userId/boxes/:boxId', async (req, res) => {
+router.put('/:userId/boxes/:boxId', isAuthenticated, async (req, res) => {
     // Find in DB and update Box being edited
     let foundBox = await Box.findByIdAndUpdate(
       req.params.boxId,
@@ -128,7 +136,7 @@ router.put('/:userId/boxes/:boxId', async (req, res) => {
 });
 
 // DESTROY - no page; just an action that will delete an entry
-router.delete('/:userId/boxes/:boxId', async (req, res) => {
+router.delete('/:userId/boxes/:boxId', isAuthenticated, async (req, res) => {
     // First, find user and remove the box id from the boxes array
     let foundUser = await User.findByIdAndUpdate(
         req.params.userId,

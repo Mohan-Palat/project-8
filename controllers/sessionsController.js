@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
       // now let's check if passwords match
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         // add the user to our session
-        // console.log("Current user: "+ foundUser);
+        console.log("Current user: "+ foundUser);
         req.session.currentUser = foundUser
         // redirect to box index
         res.redirect(`/users/${foundUser._id}/boxes`)

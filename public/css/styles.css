@@ -1,6 +1,3 @@
-h1 {
-    color:red;
-}
 
 nav {
     height: 100px;
@@ -11,12 +8,17 @@ nav {
     display: inline-block;  
 }
 
+.container {
+    color: black;
+}
 
-/* #desc-limit {
-   width: 180px; 
-   white-space: nowrap; 
-   overflow: hidden;
-} */
+.font-size-large {
+    font-size: large;
+}
+
+.font-size-xlarge {
+    font-size: 100px;
+}
 
 #logo {
     width: 100px; 
@@ -24,3 +26,38 @@ nav {
     overflow: hidden;
     margin-left: 40px;
  }
+
+
+.default-size {
+    height: 800px;
+}
+
+/* START - faded image effect. */
+.login-image {
+    position: relative; 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-image::before {    
+    content: "";
+    background-image: url('/images/unpacking.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.55;
+}
+
+.text-on-top {
+    position: relative;
+    color: black;  
+}
+
+/* END - faded image effect. */
+

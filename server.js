@@ -83,7 +83,7 @@ app.use('/sessions', require('./controllers/sessionsController.js'));
 // Take user to the main page
 app.get('/', (req, res) => {
     // res.render('sessions/new.ejs');
-    res.redirect('/users');
+    res.redirect('/sessions/new');
 });
 
 

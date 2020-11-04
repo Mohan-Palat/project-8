@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
 })
 router.delete('/', (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/')
+    res.redirect('/sessions/new')
   })
 })
 module.exports = router

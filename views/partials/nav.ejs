@@ -3,7 +3,7 @@
     <img class="brand-logo" id="logo" src="/images/MoveMeLogo.png" alt="MoveMe Logo">
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if (currentUser) { %>
-          <li>Welcome <%= currentUser.username %></li>
+          <li><span class="black-text">Welcome <%= currentUser.userName %></span></li>
           <li>
             <form action="/sessions?_method=DELETE" method="POST">
               <input type="submit" value="Log Out" class="btn-small red" />

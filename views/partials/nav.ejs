@@ -1,14 +1,9 @@
-
-<ul class="right">
-  <% if (currentUser) { %>
-  <li>Welcome <%= currentUser.name %></li>
-  <li>
-    <form action="/sessions?_method=DELETE" method="POST">
-      <input type="submit" value="Log Out" class="btn-small red" />
-    </form>
-  </li>
-  <% } else { %>
-  <li><a href="/users/new">Sign Up</a></li>
-  <li><a href="/sessions/new">Log In</a></li>
-  <% } %>
-</ul>
+<nav>
+  <div class="nav-wrapper blue-grey lighten-4">
+    <img class="brand-logo" id="logo" src="/images/MoveMeLogo.png" alt="MoveMe Logo">
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="/users/new"><span class="black-text">Sign Up</span></a></li>
+      <li><a href="/sessions/new"><span class="black-text">Log In</span></a></li>
+    </ul>
+  </div>
+</nav>

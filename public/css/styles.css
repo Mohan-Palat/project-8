@@ -2,12 +2,25 @@ h1 {
     color:red;
 }
 
+nav {
+    height: 100px;
+    line-height: 100px;
+}
+
 .button-inline {
     display: inline-block;  
 }
+
 
 #desc-limit {
    width: 140px; 
    white-space: nowrap; 
    overflow: hidden;
 }
+
+#logo {
+    width: 100px; 
+    white-space: nowrap; 
+    overflow: hidden;
+    margin-left: 40px;
+ }

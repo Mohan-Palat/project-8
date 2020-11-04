@@ -3,9 +3,6 @@ const Box = require('../models/box.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
 
-// **************************************
-// const currentUser = "User2"
-// **************************************
 
 // ROUTES
 // INDEX  - main menu 
@@ -15,6 +12,8 @@ router.get('/:userId/boxes', async (req, res) => {
          path: 'boxes',
          options: { sort: { ['identNum']: 1 } },
     });
+    
+    // Render the page
     res.render('boxes/index.ejs', {
         currentUser: req.session.currentUser,
         user: foundUser
@@ -23,11 +22,11 @@ router.get('/:userId/boxes', async (req, res) => {
 
 
 // NEW - form where new entries are made.  
-// If one or both async/await is omitted, you may get an error on the new page saying that the ingredients variable is not defined.
 router.get('/:userId/boxes/new', async (req, res) => {
     // Get all categories from the DB
     const allCategories = await Category.find({});
-    console.log("Categories:     " + allCategories);
+    // console.log("Categories:     " + allCategories);
+    
     // Get the lastest box number to prevalue the new box field
     const user = await User.findById(req.params.userId).
         // Only return the box identNum (which may be many depending on num of boxes)
@@ -42,8 +41,7 @@ router.get('/:userId/boxes/new', async (req, res) => {
                 // Assumes that the last box in the user array has the max box identNum
                 maxBoxNum = user.boxes[user.boxes.length - 1].identNum;
             }
-            // console.log('Here is the MAX box identNum:   ' + maxBoxNum);
-            // console.log('Here is the user id:   ' + user._id)
+        
         // Render page and pass categories and latest box number
         res.render('boxes/new.ejs', { 
             currentUser: req.session.currentUser,
@@ -54,13 +52,15 @@ router.get('/:userId/boxes/new', async (req, res) => {
     });    
 });
     
-// SHOW
+// SHOW - details page.  
+// It will display all boxes with some details
 router.get('/:userId/boxes/:boxId', async (req, res) => {
     // Get the user, box, and category details from the DB
     let foundUser = await User.findById(req.params.userId);
     let foundBox = await Box.findById(req.params.boxId);
     let foundCategory = await Category.findOne({name: foundBox.category});
-
+    
+    // Render page
     res.render('boxes/show.ejs', {
         currentUser: req.session.currentUser, 
         box: foundBox,
@@ -72,11 +72,14 @@ router.get('/:userId/boxes/:boxId', async (req, res) => {
 
 
 // POST (create) - no page; just an action which will add a new entry
-// Use async/await promises
 router.post('/:userId/boxes', async (req, res) => {
     // console.log("REQ BODY:     " + req.body);
+
+    // Create new Box
     let newBox = await Box.create(req.body);
-    console.log("NEW BOX:     " + newBox);
+    // console.log("NEW BOX:     " + newBox);
+    
+    // Find current user in DB and push new Box _id into array
     let foundUser = await User.findByIdAndUpdate(
          req.params.userId,
         {
@@ -86,18 +89,22 @@ router.post('/:userId/boxes', async (req, res) => {
         },
         { new: true, upsert: true }
       );
-      console.log(foundUser);
+      //   console.log(foundUser);
+    
+    // Display Boxes main page
     res.redirect(`/users/${foundUser._id}/boxes`);
 });
     
 // EDIT - form where entries are updated  
-// If one or both async/await is omitted, you may get an error on the new page saying that the ingredients variable is not defined.
 router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
     // Get all categories from the DB
     const allCategories = await Category.find({})
-    // Get box information in preparation for edit
+    
+    // Get User and Box information in preparation for edit
     const foundBox = await Box.findById(req.params.boxId)
     const foundUser = await User.findById(req.params.userId)
+    
+    // Display edit page and pass all DB info to prevalue fields
     res.render('boxes/edit.ejs', {
         currentUser: req.session.currentUser,
         categories: allCategories,
@@ -106,30 +113,36 @@ router.get('/:userId/boxes/:boxId/edit', async (req, res) => {
     });   
 });
 
-
+// UPDATE (PUT) - no page; just an action that will update an entry
 router.put('/:userId/boxes/:boxId', async (req, res) => {
+    // Find in DB and update Box being edited
     let foundBox = await Box.findByIdAndUpdate(
       req.params.boxId,
       req.body,
       { new: true },
     );
     // res.send('Update made');
+
+    // Display Boxes main page 
     res.redirect(`/users/${req.params.userId}/boxes`);
 });
 
-// DELETE
+// DESTROY - no page; just an action that will delete an entry
 router.delete('/:userId/boxes/:boxId', async (req, res) => {
-    // Find user so we can remove the box id from the boes array
+    // First, find user and remove the box id from the boxes array
     let foundUser = await User.findByIdAndUpdate(
         req.params.userId,
        { $pull: { boxes: req.params.boxId,},},
        { new: true, upsert: true }
      );
     // console.log("In DELETE, found user:   " + foundUser);
+    
+    // Second, delete box document from box collection
     let foundBox = await Box.findByIdAndRemove(
       req.params.boxId,
     );
-    // res.send('Update made');
+    
+    // Display Boxes main page 
     res.redirect(`/users/${req.params.userId}/boxes`);
 });
 

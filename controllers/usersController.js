@@ -15,18 +15,23 @@ router.get('/', (req, res) => {
 })
 
 
+// NEW - form where new entries are made.  
 router.get('/new', (req, res) => {
     res.render('users/new.ejs',
     {currentUser: req.session.currentUser})
 })
-  
-router.post('/', (req, res) => {
-    //overwrite the user password with the hashed password, then pass that in to our database
+
+// POST (create) - no page; just an action which will add a new entry
+router.post('/', async (req, res) => {
+    // Overwrite the user password with the hashed password, then pass that in to our database
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    User.create(req.body, (err, createdUser) => {
-      console.log('user is created', createdUser)
-      res.redirect(`/users/${createdUser._id}/boxes`);
-    });
+    
+    // Create new user and then redirect user to main Box page
+    let newUser = await User.create(req.body);
+    // console.log('user is created', newUser);
+
+    // Send user to Box detail page
+    res.redirect(`/users/${newUser._id}/boxes`);
 });
 
 

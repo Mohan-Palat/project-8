@@ -56,7 +56,7 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
-// populates req.body with parsed info from forms - if no data from forms will return an empty object {}
+// Body parser - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project

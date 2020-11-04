@@ -1,26 +1,27 @@
-<h1>Here are the boxes for <%=user.userName%></h1>
+<div class="default-background">
+  <div class="container">
+    <h1>Here are the boxes for <%=user.userName%></h1>
+    <div><a href="/users/<%=user._id%>/boxes/new">Create a New Box</a></div>
 
-<div class="container">
-  <div><a href="/users/<%=user._id%>/boxes/new">Create a New Box</a></div>
-
-  <div class="row">
-    <% user.boxes.forEach(box => { %>
-    <div class="col s1 m4">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Box <%=box.identNum%>: <%=box.category%></span>
-          <p>Contents: 
-            <% if (box.desc.length > 21) { %>
-              <%=box.desc.substr(0, 20)%>...</p>
-            <% } else { %>
-              <%=box.desc%></p>
-            <% } %>
-        </div>
-        <div class="card-action">
-          <a href="/users/<%=user._id%>/boxes/<%=box._id%>">Details</a>
+    <div class="row">
+      <% user.boxes.forEach(box => { %>
+      <div class="col s1 m4">
+        <div class="card blue-grey darken-1">
+          <div class="card-content z-depth-3 white-text">
+            <span class="card-title">Box <%=box.identNum%>: <%=box.category%></span>
+            <p>Contents: 
+              <% if (box.desc.length > 21) { %>
+                <%=box.desc.substr(0, 20)%>...</p>
+              <% } else { %>
+                <%=box.desc%></p>
+              <% } %>
+          </div>
+          <div class="card-action">
+            <a href="/users/<%=user._id%>/boxes/<%=box._id%>">Details</a>
+          </div>
         </div>
       </div>
+      <% }) %>
     </div>
-    <% }) %>
   </div>
 </div>

@@ -4,6 +4,10 @@ nav {
     line-height: 100px;
 }
 
+.default-background {
+    background-color: rgb(240, 240, 240);
+}
+
 .button-inline {
     display: inline-block;  
 }

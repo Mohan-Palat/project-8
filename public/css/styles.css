@@ -2,6 +2,10 @@ h1 {
     color:red;
 }
 
+.button-inline {
+    display: inline-block;  
+}
+
 #desc-limit {
    width: 140px; 
    white-space: nowrap; 

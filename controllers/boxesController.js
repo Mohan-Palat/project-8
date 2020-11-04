@@ -35,7 +35,7 @@ router.get('/:userId/boxes/new', async (req, res) => {
         exec(function (err, user) {
         // if (err) return handleError(err);
         
-            // Default the 
+            // Default the max var
             let maxBoxNum = 0;
             // If boxes are found
             if (user.boxes.length > 0) {
@@ -56,14 +56,16 @@ router.get('/:userId/boxes/new', async (req, res) => {
     
 // SHOW
 router.get('/:userId/boxes/:boxId', async (req, res) => {
-    // Get the user and box details
+    // Get the user, box, and category details from the DB
     let foundUser = await User.findById(req.params.userId);
     let foundBox = await Box.findById(req.params.boxId);
+    let foundCategory = await Category.findOne({name: foundBox.category});
 
     res.render('boxes/show.ejs', {
         currentUser: req.session.currentUser, 
         box: foundBox,
         user: foundUser,
+        category: foundCategory,
     });     
 });
 

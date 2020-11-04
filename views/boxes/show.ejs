@@ -1,19 +1,37 @@
 <h1>Here are the box details</h1>
 
-<form action="/users/<%=user._id%>/boxes/<%=box._id%>/edit" method="GET">
-    <div class="form-group">
-      <label for="identNum">Box Number</label>
-      <input type="number" class="form-control" id="identNum" name="identNum" value='<%=box.identNum%>'/>
-
-      <label for="desc">Description</label>
-      <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc%>'/>
-
-      <label for="category">Category</label>
-      <input type="text" class="form-control" id="category" name="category" value='<%=box.category%>'/>
-
+<div class="container">
+  <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img src="/images/<%=category.imageFile%>">
+        </div>
+        <div class="card-content">
+          <div class="card-content">
+            <span class="card-title">Box <%=box.identNum%>: <%=box.category%></span>
+            <p>Contents: <%=box.desc%></p>
+          </div>
+        </div>
+        
+        <div class="card-action">
+          <form class="button-inline" action="/users/<%=user._id%>/boxes/<%=box._id%>/edit" method="GET">
+          <button type="submit" class="btn btn-primary">Edit Box</button>
+          </form>
+          <form class="button-inline" action="/users/<%=user._id%>/boxes/<%=box._id%>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Edit Box</button>
-</form>
-<form action="/users/<%=user._id%>/boxes/<%=box._id%>?_method=DELETE" method="POST">
-  <input type="submit" value="DELETE"/>
-</form>
+  </div>
+</div>
+
+
+
+
+
+
+
+ 

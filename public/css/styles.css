@@ -58,9 +58,35 @@ nav {
     opacity: 0.55;
 }
 
+.edit-image {
+    position: relative; 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.edit-image::before {    
+    content: "";
+    background-image: url('/images/michal-balog-boxes3.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.20;
+}
+
+
 .text-on-top {
     position: relative;
     color: black;  
+}
+
+.label {
+    color: rgb(117, 96, 56);
 }
 
 /* END - faded image effect. */

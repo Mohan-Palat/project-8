@@ -1,39 +1,42 @@
-<div class="container">
-  <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
-  <div class="row">
-    <form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
-      <div class="row">
-        <div class="input-field col s2">
-          <label for="identNum">Box Number</label>
-          <input id="disabled" type="number" class="form-control" id="identNum" disabled value="<%=box.identNum %>"/>
+<div class="edit-image">
+  <div class="container default-size text-on-top">
+    <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
+    <!-- <div class="row"> -->
+      <form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
+        <div class="row">
+          <div class="col s2">
+            <label class="text-on-top font-size-large label" for="identNum">Box Number:</label>
+            <input class="text-on-top font-size-large" id="disabled" type="number" class="form-control" id="identNum" disabled value="<%=box.identNum %>"/>
+          </div>
+          <div class="col s4">
+            <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
+            <label class="text-on-top font-size-large label">Category</label>
+            <select name="category" id="category">
+              <% for( let index = 0; index < categories.length; index++ ) { %>
+                <option <% if (categories[index].name === box.category) { %>selected<% } %>>
+                  <%= categories[index].name%></option>
+                <% } %>
+            </select>  
+          </div>
         </div>
-        <div class="input-field col s4">
-          <!-- JQuery needed for drop downs to work in Materialize.  See layout file for more details -->
-          <select name="category" id="category">
-            <% for( let index = 0; index < categories.length; index++ ) { %>
-              <option value="<%= categories[index].name%>"><%= categories[index].name%></option>
-              <% } %>
-            <label>Category</label>
-          </select>  
+        <div class="row">
+          <div class="col s12">
+            <label class="text-on-top font-size-large label" for="desc">Contents</label>
+            <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <label for="desc">Contents</label>
-          <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
+        <div class="row">
+          <div class="col s3">
+            <input id = "moved" type = "checkbox" class = "filled-in" />
+            <label class="text-on-top" for = "moved">Moved to new location?</label>
+          </div>
+          <div class="col s3">
+            <input id = "unpacked" type = "checkbox" class = "filled-in" />
+            <label class="text-on-top" for = "unpacked">Was this box unpacked?</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s3">
-          <input id = "moved" type = "checkbox" class = "filled-in" />
-          <label for = "moved">Moved to new location?</label>
-        </div>
-        <div class="input-field col s3">
-          <input id = "unpacked" type = "checkbox" class = "filled-in" />
-          <label for = "unpacked">Was this box unpacked?</label>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    <!-- </div> -->
   </div>
 </div>

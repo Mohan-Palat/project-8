@@ -1,6 +1,3 @@
-# project-2
-
-
 # MoveMe
 An application used to track boxed items during a relocation.
 
@@ -9,24 +6,25 @@ Moving is stressful.  Whether you hire someone or not.  Many people choose to bo
 Sometimes you need a packed item immediately before/during/after the move?  Do you know what box it’s in?  Was it unpacked already?  Is it still at the old house.  Was it even packed yet?  You need to know this information quickly.  Looking through random boxes, even ones with some form of organization, is time consuming and frustrating.  This application will allow you to manage your move and help solve these problems.
 
 
-![MoveMeLogin](/documentation/ScreenPrintofGame.png "Login Page")
+![MoveMeLogin](/documentation/MoveMeLogin.png "Login Page")
 
 
 # User Stories Implemented
-- As a user, I should be able to start a new tic tac toe game.
-- As a user, I should be able to click on a square to add X first and then O, and so on.
-- As a user, I should be shown a message after each turn for if I win, lose, tie or who's turn it is next.
-- As a user, I should not be able to click the same square twice.
-- As a user, I should be shown a message when I win, lose or tie.
-- As a user, I should not be able to continue playing once I win, lose, or tie.
-- As a user, I should be able to play the game again without refreshing the page.
+- As a user, I should be able to create a new account.
+- As a user, I should be able to log in.
+- As a user, I should be able to log out.
+- As a user, I should be able to see a high level listing of my boxes only.
+- As a user, I should be able to see the details of a specific box.
+- As a user, I should be able to edit a box.
+- As a user, I should be able to create a new box. 
+- As a user, I should be able to remove a box.
+- As a user, I should be able to add a category to a box (e.g., clothes, tools, cookware).
+- As a user, I should be able to update the contents of a box.
 
 
 ## Additional Features
-- Included sound and animation effects.
-- The winning pattern is highlighted when there is a winner; otherwise, the board fades into the background.
-- Allow players to customize tokens (i.e., letters, numbers, symbols, or emojis). 
-- Results from prior six games are displayed.
+- Included sign up/log in functionality, with encrypted passwords & an authorization flow.
+- Leveraged Materialize and custom styling to create a professional looking website.
 
 
 # Technologies
@@ -34,12 +32,17 @@ Sometimes you need a packed item immediately before/during/after the move?  Do y
 * HTML
 * CSS
 * Javascript
+* Materialize
+* Express
+* Express Layouts
+* EJS
+* Mongo DB
+* Mongoose
+* Bcrypt
 
 
 # Getting Started
-You can access the game via this link:  [Neon Tic Tac Toe](https://pjsal.github.io/Tic-Tac-Toe/)
-
-You can also host or modify your own instance by forking and cloning this repository.
+You can access the site via this link:  [MoveMe](https://paul-project2.herokuapp.com/)
 
 
 # Application Design

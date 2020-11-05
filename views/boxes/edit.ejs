@@ -1,6 +1,5 @@
 <div class="edit-image">
   <div class="container default-size text-on-top">
-    <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
     <!-- <div class="row"> -->
       <form action="/users/<%= user._id%>/boxes/<%= box._id%>?_method=PUT" method="POST">
         <div class="row">
@@ -22,7 +21,7 @@
         <div class="row">
           <div class="col s12">
             <label class="text-on-top font-size-large label" for="desc">Contents</label>
-            <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>'/>
+            <input type="text" class="form-control" id="desc" name="desc" value='<%=box.desc %>' required/>
           </div>
         </div>
         <div class="row">

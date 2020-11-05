@@ -3,15 +3,17 @@
     <img class="brand-logo" id="logo" src="/images/MoveMeLogo.png" alt="MoveMe Logo">
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if (currentUser) { %>
-          <li><span class="black-text">Welcome <%= currentUser.userName %></span></li>
-          <li>
-            <form action="/sessions?_method=DELETE" method="POST">
-              <input type="submit" value="Log Out" class="btn-small red" />
+        <li><span class="blue-text text-lighten-1 font-size-large">Welcome <span id="salutation"><%= currentUser.userName.charAt(0).toUpperCase() + currentUser.userName.slice(1) %></span></span></li>
+        <li><a href="/users/<%=user._id%>/boxes"><span class="blue-text text-lighten-1 font-size-large">Box List</span></a></li>
+        <li><a href="/users/<%=user._id%>/boxes/new"><span class="blue-text text-lighten-1 font-size-large">New Box</span></a></li>
+        <li>
+          <form action="/sessions?_method=DELETE" method="POST">
+              <input type="submit" value="Log Out" class="btn-small grey" />
             </form>
           </li>
         <% } else { %>
-          <li><a href="/users/new"><span class="black-text">Sign Up</span></a></li>
-          <li><a href="/sessions/new"><span class="black-text">Log In</span></a></li>
+          <li><a href="/users/new"><span class="blue-text text-lighten-1 font-size-large">Sign Up</span></a></li>
+          <li><a href="/sessions/new"><span class="blue-text text-lighten-1 font-size-large">Log In</span></a></li>
         <% } %>
     </ul>
   </div>

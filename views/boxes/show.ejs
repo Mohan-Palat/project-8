@@ -1,6 +1,5 @@
 <div class="default-background">
   <div class="container">
-    <div><a href="/users/<%=user._id%>/boxes">Return to Box Listing</a></div>
     <div class="row">
       <div class="col s12 m7">
         <div class="card z-depth-3 brown lighten-4">
@@ -16,10 +15,10 @@
           
           <div class="card-action">
             <form class="button-inline" action="/users/<%=user._id%>/boxes/<%=box._id%>/edit" method="GET">
-            <button type="submit" class="btn btn-primary">Edit Box</button>
+              <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">Edit Box</button>
             </form>
             <form class="button-inline" action="/users/<%=user._id%>/boxes/<%=box._id%>?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-primary">Delete</button>
+              <button class="btn waves-effect waves-light red darken-1" type="submit" name="action">Delete Box</button>
             </form>
           </div>
         </div>

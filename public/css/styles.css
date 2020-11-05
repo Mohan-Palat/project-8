@@ -1,7 +1,7 @@
 
 nav {
-    height: 100px;
-    line-height: 100px;
+    height: 120px;
+    line-height: 120px;
 }
 
 .default-background {
@@ -23,13 +23,6 @@ nav {
 .font-size-xlarge {
     font-size: 100px;
 }
-
-#logo {
-    width: 100px; 
-    white-space: nowrap; 
-    overflow: hidden;
-    margin-left: 40px;
- }
 
 
 .default-size {
@@ -79,6 +72,26 @@ nav {
     opacity: 0.20;
 }
 
+.new-image {
+    position: relative; 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.new-image::before {    
+    content: "";
+    background-image: url('/images/boxes1.png');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.15;
+}
 
 .text-on-top {
     position: relative;
@@ -91,3 +104,14 @@ nav {
 
 /* END - faded image effect. */
 
+#logo {
+    width: 100px; 
+    white-space: nowrap; 
+    overflow: hidden;
+    margin-left: 40px;
+ }
+
+#salutation {
+    color: rgb(72, 72, 138);
+    text-decoration-line: underline;
+}

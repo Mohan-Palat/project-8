@@ -20,12 +20,27 @@ router.get('/:userId/boxes', isAuthenticated, async (req, res) => {
          path: 'boxes',
          options: { sort: { ['identNum']: 1 } },
     });
+
+    // Get all categories from the DB
+    const allCategories = await Category.find({});
     
-    // Render the page
-    res.render('boxes/index.ejs', {
-        currentUser: req.session.currentUser,
-        user: foundUser
-    });     
+    // Take user to box index page
+    if (foundUser.boxes.length > 0) {
+        res.render('boxes/index.ejs', {
+            currentUser: req.session.currentUser,
+            user: foundUser
+        });     
+    // User has no boxes so take him/her to new box page    
+    } else {
+        const maxBoxNum = 0;
+        // Render the page index page
+        res.render('boxes/new.ejs', { 
+            currentUser: req.session.currentUser,
+            categories: allCategories,
+            user: foundUser,
+            maxBoxNum
+        });   
+    }
 });
 
 

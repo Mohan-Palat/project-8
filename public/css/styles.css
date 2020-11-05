@@ -93,6 +93,28 @@ nav {
     opacity: 0.15;
 }
 
+.show-image {
+    position: relative; 
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.show-image::before {    
+    content: "";
+    background-image: url('/images/boxes2.png');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.25;
+}
+
+
 .text-on-top {
     position: relative;
     color: black;  

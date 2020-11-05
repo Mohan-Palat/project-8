@@ -68,6 +68,10 @@ app.use('/users', require('./controllers/boxesController'));
 // Needed for sessions and must come after the body parser
 app.use('/sessions', require('./controllers/sessionsController.js'));
 
+// Seed Category collection
+app.use('/seed', require('./seedCategory.js'));
+// Seed Users and Boxes collection
+app.use('/seed', require('./seedUserAndBoxes.js'));
 
 
 

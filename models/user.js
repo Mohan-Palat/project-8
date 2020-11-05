@@ -36,4 +36,4 @@ const userSchema = new mongoose.Schema({
   
   // These need to be singular and first letter capitalized as Mongo/Mongoose will name the collection with a lowercase first letter and pluralize it.
   module.exports = mongoose.model('User', userSchema);
-  // module.exports = mongoose.model('Box', boxSchema);
+  

@@ -5,12 +5,10 @@ const User = require('../models/user.js');
 
 router.get('/new', (req, res) => {
   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
-  // res.render('sessions/new.ejs')
 })
 
 // on sessions form submit (log in)
 router.post('/', (req, res) => {
-    // console.log("REQUEST BODY:     " + req.body);
 
   // username is found and password matches
   // successful log in
@@ -39,7 +37,7 @@ router.post('/', (req, res) => {
       // now let's check if passwords match
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         // add the user to our session
-        console.log("Current user: "+ foundUser);
+        // console.log("Current user: "+ foundUser);
         req.session.currentUser = foundUser
         // redirect to box index
         res.redirect(`/users/${foundUser._id}/boxes`)
@@ -50,10 +48,12 @@ router.post('/', (req, res) => {
       }
     }
   })
-})
+});
+
 router.delete('/', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/sessions/new')
-  })
-})
+  });
+});
+
 module.exports = router

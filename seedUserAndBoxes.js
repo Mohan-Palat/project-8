@@ -42,22 +42,14 @@ router.get('/usersandboxes', async (req, res) => {
   pwd = bcrypt.hashSync(pwd, bcrypt.genSaltSync(10));
 
   const user1 = new User({
-    userName: 'me11',
+    userName: 'me1',
     password: pwd,
     boxes: [],
   });
 
-  // const user1 = await User.create({
-  //   name: 'User1',
-  //   boxes: [{
-  //       identNum: 2,
-  //       desc: "This is box 2",
-  //       category: "Pictures"
-  //     }],
-  // });
 
   const user2 = new User({
-    userName: 'me12',
+    userName: 'me2',
     password: pwd,
     boxes: [],
   });

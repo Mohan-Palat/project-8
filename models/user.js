@@ -14,10 +14,6 @@ const Box = require('./box.js');
 // }, { timestamps: true });
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    default: ''
-  },
   userName: {
     type: String,
     unique: true

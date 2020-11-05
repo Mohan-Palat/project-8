@@ -21,8 +21,8 @@ router.get('/:userId/boxes', isAuthenticated, async (req, res) => {
          options: { sort: { ['identNum']: 1 } },
     });
 
-    // Get all categories from the DB
-    const allCategories = await Category.find({});
+    // Get all categories from the DB in order
+    const allCategories = await Category.find({}).sort('name');
     
     // Take user to box index page
     if (foundUser.boxes.length > 0) {
@@ -46,9 +46,8 @@ router.get('/:userId/boxes', isAuthenticated, async (req, res) => {
 
 // NEW - form where new entries are made.  
 router.get('/:userId/boxes/new', isAuthenticated, async (req, res) => {
-    // Get all categories from the DB
-    const allCategories = await Category.find({});
-    // console.log("Categories:     " + allCategories);
+    // Get all categories from the DB in order
+    const allCategories = await Category.find({}).sort('name');
     
     // Get the lastest box number to prevalue the new box field
     const user = await User.findById(req.params.userId).
@@ -120,8 +119,8 @@ router.post('/:userId/boxes', isAuthenticated, async (req, res) => {
     
 // EDIT - form where entries are updated  
 router.get('/:userId/boxes/:boxId/edit', isAuthenticated, async (req, res) => {
-    // Get all categories from the DB
-    const allCategories = await Category.find({})
+    // Get all categories from the DB is order
+    const allCategories = await Category.find({}).sort('name');
     
     // Get User and Box information in preparation for edit
     const foundBox = await Box.findById(req.params.boxId)

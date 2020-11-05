@@ -6,13 +6,13 @@ Moving is stressful.  Whether you hire someone or not.  Many people choose to bo
 Sometimes you need a packed item immediately before/during/after the move?  Do you know what box it’s in?  Was it unpacked already?  Is it still at the old house.  Was it even packed yet?  You need to know this information quickly.  Looking through random boxes, even ones with some form of organization, is time consuming and frustrating.  This application will allow you to manage your move and help solve these problems.
 
 ## Log In Page
-![MoveMeLogin](/documentation/MoveMeLogin.png "Login Page")
+![MoveMe Login](/documentation/MoveMeLogin.png "Login Page")
 
 ## Box List Page
-![MoveMeBoxListing](/documentation/MoveMeBoxListing.png "Box List Page")
+![MoveMe Box Listing](/documentation/MoveMeBoxListing.png "Box List Page")
 
 ## Box Detail Page
-![MoveMeDetails](/documentation/MoveMeBoxDetails.png "Box Details Page")
+![MoveMe Details](/documentation/MoveMeBoxDetails.png "Box Details Page")
 
 # User Stories Implemented
 - As a user, I should be able to create a new account.
@@ -30,6 +30,7 @@ Sometimes you need a packed item immediately before/during/after the move?  Do y
 ## Additional Features
 - Included sign up/log in functionality, with encrypted passwords & an authorization flow.
 - Leveraged Materialize and custom styling to create a professional looking website.
+- Seed files/routes can be used to prepopulate the database.
 
 
 # Technologies
@@ -37,6 +38,7 @@ Sometimes you need a packed item immediately before/during/after the move?  Do y
 * HTML
 * CSS
 * Javascript
+* Node JS
 * Materialize
 * Express
 * Express Layouts
@@ -54,50 +56,40 @@ You can access the site via this link:  [MoveMe](https://paul-project2.herokuapp
 
 ## Entity Relationship Diagram
 
-[MoveMeERD](/documentation/MoveMeERD.png "ERD Diagram")
+![MoveMe ERD](/documentation/MoveMeERD.png "ERD Diagram")
 
-## Wireframe
+## RESTful Routes
+
+![MoveMe RESTful Routes For Users](/documentation/REST_RoutesForUsers.png "Users RESTful Routes")
+
+![MoveMe RESTful Routes For Boxes](/documentation/REST_RoutesForBoxes.png "Boxes RESTful Routes")
+
+## Wireframe  NEED TO COMPLETE
 
 [Tic Tac Toe wireframe](/documentation/Wireframe.png "Tic Tac Toe wireframe")
 
 ## Application design
+This application employs the Model View Controller principle to create a basic interactive web application.  It uses RESTful practices to manage the available services.
 
-The application consists of two classes, game (game.js) and player (player.js).  The game class handles all of the game mechanics such as adding players, alternating turns, and scoring.  The player class is for basic player xdata including customized tokens.
+### Front-end
+The front-end is a Node JS application which relies on Express and EJS.  Page styling is handled primarily by Materialize and custom CSS overrides. 
 
-The main.js file manages the UI dynamics along with class interactions.
+### Back-end
+It utilizes Mongo as a non-relationship data store.  There are three collections defined: user, box, category.  User has a one-to-many relationship with box.  They are associated via a referential tie defined using Mongoose schemas.  The Category is a stand alone collection which is used to populate drop down boxes.  
 
-The style sheet controls the numerous sytling aspects making use of flexbox for the overall layout and grid styling for the game grid.
-
-The index.html contains the basic markup along with links to the style sheet, javascript files, and audio files.
-
-### Scoring and Winner Determination
-
-Scoring is maintained in two separate arrays, a row/column tracker and a diagonal tracker.  The row/column tracker has six numeric elements defaulted to 0.  The first three represent columns 1-3 and the last three are for rows 1-3.  
-
-Each time player 1 places a token in a sqaure, 1 is added to the respective column and row.  Similarly, 1 is subtrated from the row/column when player 2 selects a square.
-
-A winner is identified whenever a row or column element has a +3 or -3.
-
-The diagonal array and winner determination is a bit clunky.  It is tracked in an array with 7 characters, the forth element being an arbitrary tilda. That serves as a separater when the array is later evaluated.
-
-The first three elements represent a diagonal win from top left to lower right.  The last three are for a win from top right to lower left.  An 'X' or 'O' is placed in the appropriate element when the user selects it.
-
-The array is converted to a string and inspected for patterns to determine a winner (e.g., the first three elements are 'XXX', last three are 'OOO').  The tilda in the array is used to prevent false positives.
-
-Naturally, if there is no winner the game ends in a draw.
-
-It's important to note that 'X' and 'O' are used behind the scenes for scoring even if the user selects different tokens.
+There two seeds files and associated routes which can be used to prepopulate the collections. 
 
 
- # Known Issues
- - Players can choose more than one character.  This is mainly because emojis are made up of several charcters and I needed to allow for this.  This presents a problem when several characters are selected; it will not display properly in the game boxes.
- - Players can choose the same character or no charcter at all. 
+# Known Issues
+- Some input fields can be blank which results in crashes if the field is queried at a future point in time.
+- Site crashes when setting up a new user with an existing username. 
 
 
- # Future Improvements
- - Provide an easier way to select emojis rather than copy/paste from another window/site.
- - Incorporate more feedback to players using sound and visual effects (e.g, audio indicator when game is over, win vs draw, etc).
- - Incorporate media queries for proper formatting on mobile devices.
- - AI competitor
- - Use persistence to allow uninterrupted play after page refreshes or connectivity loss. 
- - Refactor code; make use of DRY techniques. 
+# Future Improvements
+- Make login and new user errors more presentable and friendly to user.
+- Finish implementing 'unpacked' and 'relocated' functionality.  This includes adding fields to models as well as card identification (maybe different colors) to identify state of box (i.e., moved, unpacked).
+- Create a printable label that van be attached to box.
+- Use pagination to limit the amount of boxes shown per page.
+- Add search features such as show all boxes by: category, wildcard search, relocated, unpacked.
+- Add destination field to associated collection.  This ties into the lable concept.  The label will include the destination in the new location (structure/floor/room) where movers can place the box.  This will avoid having boxes in wrong places or all in one location in the destination.
+- Add options to set 'unpacked' and 'relocated' indicators on/off for all boxes for situations when a move is done at one time.

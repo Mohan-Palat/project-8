@@ -5,14 +5,14 @@ const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
 
 // ROUTES
-// INDEX  - main menu
-router.get('/', (req, res) => {
-    // res.render('sessions/new.ejs')
-    res.render(
-      'users/index.ejs',
-      {currentUser: req.session.currentUser}
-    )
-})
+// // INDEX  - main menu - DONT THINK THIS IS USED AND CAN BE REMOVED
+// router.get('/', (req, res) => {
+//     // res.render('sessions/new.ejs')
+//     res.render(
+//       'users/index.ejs',
+//       {currentUser: req.session.currentUser}
+//     )
+// })
 
 
 // NEW - form where new entries are made.  

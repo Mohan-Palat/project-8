@@ -3,6 +3,7 @@ const Box = require('../models/box.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
 
+// This will be used to verify the user successully logged in
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
       return next()

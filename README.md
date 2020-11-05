@@ -5,9 +5,14 @@ Moving is stressful.  Whether you hire someone or not.  Many people choose to bo
 
 Sometimes you need a packed item immediately before/during/after the move?  Do you know what box it’s in?  Was it unpacked already?  Is it still at the old house.  Was it even packed yet?  You need to know this information quickly.  Looking through random boxes, even ones with some form of organization, is time consuming and frustrating.  This application will allow you to manage your move and help solve these problems.
 
-
+## Log In Page
 ![MoveMeLogin](/documentation/MoveMeLogin.png "Login Page")
 
+## Box List Page
+![MoveMeBoxListing](/documentation/MoveMeBoxListing.png "Box List Page")
+
+## Box Detail Page
+![MoveMeDetails](/documentation/MoveMeBoxDetails.png "Box Details Page")
 
 # User Stories Implemented
 - As a user, I should be able to create a new account.
@@ -46,6 +51,10 @@ You can access the site via this link:  [MoveMe](https://paul-project2.herokuapp
 
 
 # Application Design
+
+## Entity Relationship Diagram
+
+[MoveMeERD](/documentation/MoveMeERD.png "ERD Diagram")
 
 ## Wireframe
 

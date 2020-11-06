@@ -5,7 +5,7 @@ const User = require('./models/user.js');
 const bcrypt = require('bcrypt');
 
 router.get('/usersandboxes', async (req, res) => {
-  // The next steps are doing several things, 1) creating a new instance of users and boxes, tieing them together via Mongo reference, and then saving to the DB.  This is better than creating individual boxes/categories, saving them to the DB, then retrieving them from the db onlt to tie them together.
+  // The next steps are doing several things, 1) creating a new instance of users and boxes, tieing them together via Mongo reference, and then saving to the DB.  This is better than creating individual boxes/categories, saving them to the DB, then retrieving them from the db only to tie them together.
 
   // Async is a "promise".  We don't want it frozen when this is processing.  This needs to be wrapped in a function.
   // async function seed() {

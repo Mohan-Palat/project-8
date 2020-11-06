@@ -3,38 +3,29 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user.js');
 
+
+// ROUTES
+// NEW - form where new entries are made.
 router.get('/new', (req, res) => {
   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
 })
 
-// on sessions form submit (log in)
+// POST (create) - no page; just an action which will add a new entry
 router.post('/', (req, res) => {
 
-  // username is found and password matches
-  // successful log in
-
-  // username is not found - who cares about password if you don't have a username that is found?
-  // unsuccessful login
-  
-  // username found but password doesn't match
-  // unsuccessful login
-  
-  // some weird thing happened???????
-  
   // Step 1 Look for the username
-  console.log("IN SESSIONS POST, userName:  " + req.body.userName);
-  console.log("IN SESSIONS POST, password:  " + req.body.password);
+  // console.log("IN SESSIONS POST, userName:  " + req.body.userName);
+  // console.log("IN SESSIONS POST, password:  " + req.body.password);
   User.findOne({ userName: req.body.userName }, (err, foundUser) => {
     // Database error
     if (err) {
       console.log(err)
-      res.send('oops the db had a problem')
+      res.send('There was a problem with the database')
     } else if (!foundUser) {
-      // if found user is undefined/null not found etc
-      res.send('<a  href="/">Sorry, no user found </a>')
+      // If username not found
+      res.send('<a  href="/">Username notr found</a>')
     } else {
-      // user is found yay!
-      // now let's check if passwords match
+      // Otherwise the user is found so decypt and compare the password
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         // add the user to our session
         // console.log("Current user: "+ foundUser);
@@ -50,6 +41,7 @@ router.post('/', (req, res) => {
   })
 });
 
+// DESTROY - no page; just an action that will destroy a session
 router.delete('/', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/sessions/new')

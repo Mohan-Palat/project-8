@@ -1,6 +1,6 @@
-//___________________
-//Dependencies
-//___________________
+
+// DEPENDENCIES
+
 // Needed for environment variables
 require('dotenv').config()    // This needs to be at the very top
 const express = require('express');
@@ -8,40 +8,33 @@ const express = require('express');
 const session = require('express-session')
 // Needed for EJS Layouts
 const expressLayouts = require('express-ejs-layouts');
+// Override needed for put and delete requests
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
+// Environment variable assignments
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODBURI;
 
-//___________________
-//Port
-//___________________
-// Allow use of Heroku's port or your own local port, depending on the environment
-// const PORT = process.env.PORT || 3000;
-//___________________
-//Database
-//___________________
-// How to connect to the database either via heroku or locally
-// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ 'paul-project2';
 // Connect to Mongo
 mongoose.connect(MONGODB_URI ,  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
-  });
+});
 // Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 // open the connection to mongo
 db.on('open' , ()=>{});
-//___________________
-//Middleware
-//___________________
-// Use public folder for static assets
+
+
+// MIDDLEWARE
+
+// Path for CSS, images, or any other items
 app.use(express.static('public'));
 // Needed for EJS
 app.set('view engine', 'ejs');
@@ -50,9 +43,9 @@ app.use(expressLayouts);
 // Define path and params for sessions information
 app.use(
   session({
-    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+    secret: process.env.SECRET, 
+    resave: false, 
+    saveUninitialized: false 
   })
 )
 // Body parser - if no data from forms will return an empty object {}
@@ -71,27 +64,13 @@ app.use('/sessions', require('./controllers/sessionsController.js'));
 // Seed Category collection
 app.use('/seed', require('./seedCategory.js'));
 // Seed Users and Boxes collection
-app.use('/seed', require('./seedUserAndBoxes.js'));
+app.use('/seed2', require('./seedUserAndBoxes.js'));
 
 
-
-//___________________
-// Routes
-//___________________
-//localhost:3000
-// app.get('/' , (req, res) => {
-//   res.send('Hello World!');
-// });
-
-// This is not in the controller files because it is considered a separate page.
 // Take user to the main page
 app.get('/', (req, res) => {
-    // res.render('sessions/new.ejs');
     res.redirect('/sessions/new');
 });
 
 
-//___________________
-//Listener
-//___________________
 app.listen(PORT, () => console.log( 'Listening on port:', PORT));

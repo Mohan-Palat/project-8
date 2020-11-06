@@ -64,9 +64,9 @@ You can access the site via this link:  [MoveMe](https://paul-project2.herokuapp
 
 ![MoveMe RESTful Routes For Boxes](/documentation/REST_RoutesForBoxes.png "Boxes RESTful Routes")
 
-## Wireframe  NEED TO COMPLETE
+## Wireframes
 
-[MoveMe MainMenu wireframe](/documentation/MoveMeMainMenu.jpg "MoveMe MainMenu wireframe")
+![MoveMe MainMenu wireframe](/documentation/MoveMeMainMenu.jpg "MoveMe MainMenu wireframe")
 
 ## Application design
 This application employs the Model View Controller principle to create a basic interactive web application.  It uses RESTful practices to manage the available services.
